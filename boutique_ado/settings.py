@@ -70,7 +70,7 @@ TEMPLATES = [
         'OPTIONS': {
             'context_processors': [
                 'django.template.context_processors.debug',
-                'django.template.context_processors.request',
+                'django.template.context_processors.request', #required by allauth
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
             ],
@@ -112,6 +112,19 @@ AUTH_PASSWORD_VALIDATORS = [
         'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
     },
 ]
+
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+
+# Allauth configuration
+ACCOUNT_AUTHENTICATION_METHOD = 'username_email'  # Allow login with either
+ACCOUNT_EMAIL_REQUIRED = True                     # Require email at signup
+ACCOUNT_EMAIL_VERIFICATION = 'mandatory'          # Must confirm email to log in
+ACCOUNT_SIGNUP_EMAIL_ENTER_TWICE = True           # Double-entry of email
+ACCOUNT_USERNAME_MIN_LENGTH = 4                   # Minimum username length
+LOGIN_REDIRECT_URL = '/'                   # Redirect after login (temporary)
+LOGIN_URL = '/accounts/login/'                    # Default login URL
+
+
 
 AUTHENTICATION_BACKENDS = [
     'django.contrib.auth.backends.ModelBackend',  # default login backend
